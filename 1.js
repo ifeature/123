@@ -9,9 +9,9 @@ const dir = process.argv[2];
 const ignored = /node_modules/;
 const filelist = [];
 
-// if (!dir) {
-//   throw new TypeError('You should specify directory path');
-// }
+if (!dir) {
+  throw new TypeError('You should specify directory path');
+}
 
 function getFiles(dir) {
   const directory = dir + '/';
@@ -30,7 +30,7 @@ function getFiles(dir) {
             filelist.push(fileName);
           }
         }
-        console.log('---', filelist);
+        // console.log('---', filelist);
       });
     });
   });
@@ -72,8 +72,7 @@ function fixPropTypes(fileName) {
         }
 
         if (!hasValidPropTypes) {
-          const dataArray = modifiedData.split(/\r\n/);
-          console.log('!!!!!!!!!!!!!', dataArray);
+          const dataArray = modifiedData.split(/\n/);
           dataArray.splice(1, 0, propTypesImportString );
           modifiedData = dataArray.join('\n');
           fs.writeFile(fileName, modifiedData, (err) => {
@@ -90,5 +89,5 @@ function fixPropTypes(fileName) {
   });
 }
 
-// getFiles(dir);
-fixPropTypes('./test.js');
+getFiles(dir);
+// fixPropTypes('./test.js');

@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import PropTypes from 'prop-types';
 
 function Header({ heading }) {
   return (
@@ -11,5 +12,3 @@ Header.propTypes = {
 };
 
 export default Header;
-
-import PropTypes from 'prop-types';
