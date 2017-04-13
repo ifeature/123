@@ -2,16 +2,11 @@
 
 const fs = require('fs');
 const path = require('path');
-const stat = fs.Stats;
 
 const validExtensions = ['.js', '.jsx', '.ts', '.tsx'];
-const dir = process.argv[2];
+const directory = process.cwd();
 const ignored = /node_modules/;
 const filelist = [];
-
-if (!dir) {
-  throw new TypeError('You should specify directory path');
-}
 
 function getFiles(dir) {
   const directory = dir + '/';
@@ -47,6 +42,7 @@ function parseGroups(p1, p2) {
 }
 
 const pattern = /\, *\{(.*)PropTypes(.*)\}/;
+const pattern2 = /React\.PropTypes/;
 const validPropTypes = /import +PropTypes +from +'prop-types'/;
 const propTypesImportString = 'import PropTypes from \'prop-types\';';
 
@@ -58,7 +54,12 @@ function fixPropTypes(fileName) {
       throw err;
     }
 
-    modifiedData = data.replace(pattern, function(match, p1, p2, offset, string) {
+    modifiedData = data
+    .replace(pattern2, function(match, p1, offset, string) {
+      const replacement = 'PropTypes';
+      return replacement;
+    })
+    .replace(pattern, function(match, p1, p2, offset, string) {
       const replacement = parseGroups(p1, p2);
       return replacement;
     });
@@ -89,5 +90,5 @@ function fixPropTypes(fileName) {
   });
 }
 
-getFiles(dir);
+getFiles(directory);
 // fixPropTypes('./test.js');
