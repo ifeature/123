@@ -1,5 +1,4 @@
-import React, { Component, PureComponent } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component, PureComponent, PropTypes } from 'react';
 
 function Header({ heading }) {
   return (
@@ -8,7 +7,8 @@ function Header({ heading }) {
 }
 
 Header.propTypes = {
-  heading: PropTypes.string.isRequired
+  heading: React.PropTypes.string.isRequired,
+  footer: React.PropTypes.string.isRequired
 };
 
 export default Header;

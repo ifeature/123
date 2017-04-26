@@ -42,7 +42,7 @@ function parseGroups(p1, p2) {
 }
 
 const pattern = /\, *\{(.*)PropTypes(.*)\}/;
-const pattern2 = /React\.PropTypes/;
+const pattern2 = /React\.PropTypes/g;
 const validPropTypes = /import +PropTypes +from +'prop-types'/;
 const propTypesImportString = 'import PropTypes from \'prop-types\';';
 
